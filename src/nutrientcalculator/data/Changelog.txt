@@ -1,0 +1,20 @@
+1.2.1 - July 13 2015
+-Bug Fixes
+-Added more comments
+-Made code more readable, removed useless code
+
+1.2.0 - July 12 2015
+-Removed all borrowed code (All code is now made by me!)
+-Changed data files to delimited text files (Delimiting character is "#"
+-Cut the size of the program by 1/3 (now 1.96MB)
+-Added the reader class to read the new data files
+
+1.1.0 - June 25 2015
+-Removed menu bar on the print frame
+-Reorganized the files
+-Added save/open features
+-Added the measures class to prevent having to access files more than once
+-Added some comments
+
+1.0.0 - June 15 2015
+First main build!
