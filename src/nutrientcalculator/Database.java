@@ -25,6 +25,8 @@ import org.xml.sax.SAXException;
 
 public class Database {
 
+    static DecimalFormat oneDecimal = new DecimalFormat("#,##0.0");
+
     //main method for bug testing
     public static void main(String args[]) {
         Reader r = new Reader("data//FOOD_NM.txt");
@@ -34,8 +36,6 @@ public class Database {
             System.out.println(databaseLine[0].toString() + ":" + databaseLine[1].toString());
         }
     }
-
-    static DecimalFormat oneDecimal = new DecimalFormat("#,##0.0");
 
     public static ArrayList<Ingredient> search(String keyword) {
         double temp;

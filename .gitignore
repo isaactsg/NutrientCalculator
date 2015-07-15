@@ -49,3 +49,4 @@ dist/README.TXT
 manifest.mf
 Fudge.xml
 build.xml
+/dist/

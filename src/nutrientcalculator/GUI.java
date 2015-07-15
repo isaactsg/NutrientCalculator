@@ -70,6 +70,8 @@ public class GUI extends javax.swing.JFrame {
         btnUseSelected = new javax.swing.JButton();
         btnHelp1 = new javax.swing.JButton();
         spQuantity = new javax.swing.JSpinner();
+        cmbCategory = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
         frameAbout = new javax.swing.JDialog();
         btnCloseAbout = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -186,6 +188,15 @@ public class GUI extends javax.swing.JFrame {
 
         spQuantity.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
+        cmbCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoryActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Category");
+
         javax.swing.GroupLayout frameRecepieEntryLayout = new javax.swing.GroupLayout(frameRecepieEntry.getContentPane());
         frameRecepieEntry.getContentPane().setLayout(frameRecepieEntryLayout);
         frameRecepieEntryLayout.setHorizontalGroup(
@@ -199,7 +210,11 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(frameRecepieEntryLayout.createSequentialGroup()
                                 .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnUseSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnUseSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(frameRecepieEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(frameRecepieEntryLayout.createSequentialGroup()
                                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,12 +245,17 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(cmbFraction)
                         .addComponent(cmbUnit)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(frameRecepieEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOK1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnUseSelected, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnHelp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(frameRecepieEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(frameRecepieEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnOK1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(btnSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(btnUseSelected, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(btnHelp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(frameRecepieEntryLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                 .addContainerGap())
@@ -674,7 +694,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
-        ingredientLookUp();
+        ingredientLookUp(false);
     }//GEN-LAST:event_btnSearch2ActionPerformed
 
     private void btnUseSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseSelectedActionPerformed
@@ -723,7 +743,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void tfNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNameKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            ingredientLookUp();
+            ingredientLookUp(false);
         }
     }//GEN-LAST:event_tfNameKeyPressed
 
@@ -965,12 +985,38 @@ public class GUI extends javax.swing.JFrame {
         save();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void cmbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoryActionPerformed
+        DefaultListModel m = ingredientLookUp(true);
+        String selCat = cmbCategory.getSelectedItem().toString();
+        if (!selCat.equals("ALL")) {
+            for (int i = matchesIngr.size() - 1; i >= 0; i--) {
+                if (matchesIngr.get(i).getName().contains(",")) {
+                    if (!matchesIngr.get(i).getName().substring(0, matchesIngr.get(i).getName().indexOf(",")).equals(selCat)) {
+                        matchesIngr.remove(i);
+                        m.removeElementAt(i);
+                    }
+                } else {
+                    if (!matchesIngr.get(i).getName().equals(selCat)) {
+                        matchesIngr.remove(i);
+                        m.removeElementAt(i);
+                    }
+                }
+            }
+        }
+        listResults.setModel(m);
+    }//GEN-LAST:event_cmbCategoryActionPerformed
+
     /**
      * This method searches using the string provided by the user THIS HAS BEEN
-     * FIXED
+     * FIXE
+     *
+     * @param research says whether or not it need to regenerate the category
+     * list
      */
-    public void ingredientLookUp() {
+    public DefaultListModel ingredientLookUp(boolean research) {
         DefaultListModel matchesList = new DefaultListModel();
+        DefaultComboBoxModel categories = new DefaultComboBoxModel();
+        categories.addElement("ALL");
         matchesIngr = new ArrayList<>();
         //check that the search string isn't too short
         if (tfName.getText().length() < 2) {
@@ -986,12 +1032,38 @@ public class GUI extends javax.swing.JFrame {
                 //add the matches to the list model
                 for (int i = 0; i < matchesIngr.size(); i++) {
                     matchesList.addElement(matchesIngr.get(i).getName());
+                    if (!research) {
+                        String cat;
+                        if (matchesIngr.get(i).getName().contains(",")) {
+                            cat = matchesIngr.get(i).getName().substring(0, matchesIngr.get(i).getName().indexOf(","));
+                        } else {
+                            cat = matchesIngr.get(i).getName();
+                        }
+
+                        boolean duplicate = false;
+                        for (int j = 0; j < categories.getSize(); j++) {
+                            if (cat.equals(categories.getElementAt(j))) {
+                                duplicate = true;
+                                j = categories.getSize() + 1;
+                            }
+                        }
+                        if (!duplicate) {
+                            categories.addElement(cat);
+                        }
+
+                    }
+                }
+                if (categories.getSize() > 1) {
+                    sortList(categories);
+                    cmbCategory.setEnabled(true);
+                    cmbCategory.setModel(categories);
                 }
                 listResults.setEnabled(true);
             }
         }
         //display model
         listResults.setModel(matchesList);
+        return matchesList;
     }//fixed
 
     /**
@@ -1182,6 +1254,20 @@ public class GUI extends javax.swing.JFrame {
         }
     }
 
+    public ComboBoxModel sortList(DefaultComboBoxModel list) {
+        String[] array = new String[list.getSize() - 1];
+        for (int i = 1; i < list.getSize(); i++) {
+            array[i - 1] = list.getElementAt(i).toString();
+        }
+        SortingAlgorithm.sort(array);
+        list.removeAllElements();
+        list.addElement("ALL");
+        for (int i = 0; i < array.length; i++) {
+            list.addElement(array[i]);
+        }
+        return list;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1250,6 +1336,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JButton btnSearch2;
     public static javax.swing.JButton btnTitle;
     public static javax.swing.JButton btnUseSelected;
+    public static javax.swing.JComboBox cmbCategory;
     public static javax.swing.JComboBox cmbFraction;
     public static javax.swing.JComboBox cmbHelp;
     public static javax.swing.JComboBox cmbUnit;
@@ -1262,6 +1349,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JFrame frameRecepieEntry;
     public static javax.swing.JFrame frameTitle;
     public static javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
     public static javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JMenuBar jMenuBar1;
