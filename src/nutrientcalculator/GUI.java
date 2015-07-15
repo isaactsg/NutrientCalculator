@@ -11,6 +11,8 @@ import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -803,7 +805,7 @@ public class GUI extends javax.swing.JFrame {
         selected.setFractionNum(cmbFraction.getSelectedIndex());
         if (!cmbUnit.getSelectedItem().equals("g")) {
             selected.setFractionName(cmbFraction.getSelectedItem().toString());
-        }else{
+        } else {
             selected.setFractionName(selected.getQuantity() + "g");
         }
         selected.setUnit(cmbUnit.getSelectedItem().toString());
@@ -907,7 +909,7 @@ public class GUI extends javax.swing.JFrame {
                 recipe = new Recipe();
                 Database.open(fcSave.getSelectedFile());
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | FileNotFoundException e) {
             System.out.println("Didn't Select File Error: " + e.toString());
         }
 
