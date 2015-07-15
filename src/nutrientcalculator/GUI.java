@@ -716,6 +716,7 @@ public class GUI extends javax.swing.JFrame {
         spQuantity.setEnabled(false);
         frameRecepieEntry.setVisible(true);
         btnOK1.setEnabled(false);
+        edit = false;
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
