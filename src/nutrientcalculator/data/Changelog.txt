@@ -4,6 +4,7 @@
 -Made code more readable, removed useless code
 -Made it so that you can't use an ingredient that has no data
 -Saves now include a log file
+-More usable on Linux (but still buggy)
 
 1.2.0 - July 12 2015
 -Removed all borrowed code (All code is now made by me!)
