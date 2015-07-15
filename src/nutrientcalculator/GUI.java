@@ -259,7 +259,7 @@ public class GUI extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Recipe Nutrient Analysis\nv1.2.0\nJuly 12 2015\nBy Isaac Wismer\n\nThis program uses the Canadian Nutrient File 2010\nFor more information visit:\nhttp://www.hc-sc.gc.ca/fn-an/nutrition/\n\tfiche-nutri-data/index-eng.php\nPlease do not distribute\nTo report a bug please email idw.wismer@gmail.com");
+        jTextArea1.setText("Recipe Nutrient Analysis\nv1.2.1\nJuly 12 2015\nBy Isaac Wismer\n\nThis program uses the Canadian Nutrient File 2010\nFor more information visit:\nhttp://www.hc-sc.gc.ca/fn-an/nutrition/\n\tfiche-nutri-data/index-eng.php\nPlease do not distribute\nTo report a bug please email idw.wismer@gmail.com");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
         jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -801,7 +801,11 @@ public class GUI extends javax.swing.JFrame {
         listRecipe.setModel(recipe.getList());
         selected.setQuantity((int) spQuantity.getValue());
         selected.setFractionNum(cmbFraction.getSelectedIndex());
-        selected.setFractionName(cmbFraction.getSelectedItem().toString());
+        if (!cmbUnit.getSelectedItem().equals("g")) {
+            selected.setFractionName(cmbFraction.getSelectedItem().toString());
+        }else{
+            selected.setFractionName(selected.getQuantity() + "g");
+        }
         selected.setUnit(cmbUnit.getSelectedItem().toString());
         selected.setUnitNum(cmbUnit.getSelectedIndex());
         frameRecepieEntry.setVisible(false);
@@ -820,11 +824,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         for (int j = listRecipe.getSelectedIndices().length - 1; j >= 0; j--) {
-            for (int i = j; i < recipe.size() - 1; i++) {
-                recipe.setSingleIngredient(i, recipe.getSingleIngredientIndex(i + 1));
-            }
-            recipe.remove(recipe.size() - 1);
-            recipe.getList().removeElementAt(listRecipe.getSelectedIndex());
+            recipe.remove(listRecipe.getSelectedIndices()[j]);
+            recipe.getList().removeElementAt(listRecipe.getSelectedIndices()[j]);
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -1148,9 +1149,6 @@ public class GUI extends javax.swing.JFrame {
         units.addElement("mL");
         units.addElement("g");
         units.addElement("Other");
-        cmbFraction.setEnabled(true);
-        cmbUnit.setEnabled(true);
-        spQuantity.setEnabled(true);
         if (!edit) {
             selected = matchesIngr.get(listResults.getSelectedIndex());
             recipe.addIngredient(selected);
@@ -1162,18 +1160,25 @@ public class GUI extends javax.swing.JFrame {
             units.removeElementAt(0);
             cmbFraction.setEnabled(false);
         }
-        if (!edit) {
-            selected = recipe.getSingleIngredientIndex(recipe.getIngredients().size() - 1);
+        if (selected.getMeasures().isEmpty()) {
+            JOptionPane.showMessageDialog(frameRecepieEntry, "Error: No measures available.\nCannot use ingredient; Please choose another.\nBlame the person who made the database.", "Error: No Measures", WIDTH);
         } else {
-            while (selected.getSingleMeasureIndex(selected.getMeasures().size() - 1).getName().equals("")) { //prevents empty measures in the list               
-                selected.getMeasures().remove(selected.getMeasures().size() - 1);
+            if (!edit) {
+                selected = recipe.getSingleIngredientIndex(recipe.getIngredients().size() - 1);
+            } else {
+                while (selected.getSingleMeasureIndex(selected.getMeasures().size() - 1).getName().equals("")) { //prevents empty measures in the list               
+                    selected.getMeasures().remove(selected.getMeasures().size() - 1);
+                }
             }
+            cmbFraction.setEnabled(true);
+            cmbUnit.setEnabled(true);
+            spQuantity.setEnabled(true);
+            cmbUnit.setModel(units);
+            cmbFraction.setModel(model);
+            tfName.setText(selected.getName());
+            spQuantity.setValue(1);
+            btnOK1.setEnabled(true);
         }
-        cmbUnit.setModel(units);
-        cmbFraction.setModel(model);
-        tfName.setText(selected.getName());
-        spQuantity.setValue(1);
-        btnOK1.setEnabled(true);
     }
 
     /**

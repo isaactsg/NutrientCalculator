@@ -4,9 +4,17 @@
 package nutrientcalculator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -22,7 +30,7 @@ public class Database {
 
     //main method for bug testing
     public static void main(String args[]) {
-        Reader r = new Reader("data\\FOOD_NM.txt");
+        Reader r = new Reader("data//FOOD_NM.txt");
         int length = r.getLength();
         for (int i = 0; i < length; i++) {
             Object databaseLine[] = r.getNextLine();
@@ -53,8 +61,8 @@ public class Database {
         //read from the nutrients to check if they match the queries
         try {
             //read from the file
-            Reader r = new Reader("data\\FOOD_NM.txt");
-            int length = r.getLength();
+            Reader r = new Reader("data//FOOD_NM.txt");
+            int length = r.getLength() - 1;
             //read each line and check if it matched the search terms
             for (int i = 0; i < length; i++) {
                 Object databaseLine[] = r.getNextLine();
@@ -79,7 +87,10 @@ public class Database {
     /* This method saves the recipe to a file
      * @param The file path
      */
-    public static void save(File file) {
+    public static void save(File file) throws FileNotFoundException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        PrintWriter p = new PrintWriter(file + ".txt");
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -92,10 +103,12 @@ public class Database {
             // title element
             Element title = doc.createElement("title");
             title.appendChild(doc.createTextNode(GUI.recipe.getTitle()));
+            p.println(GUI.recipe.getTitle());
             rootElement.appendChild(title);
             // title element
             Element instructions = doc.createElement("instructions");
             instructions.appendChild(doc.createTextNode(GUI.recipe.getInstructions()));
+            p.println(GUI.recipe.getInstructions());
             rootElement.appendChild(instructions);
 
             for (int i = 0; i < GUI.recipe.getIngredients().size(); i++) {
@@ -106,34 +119,42 @@ public class Database {
                 Element id = doc.createElement("ID");
                 id.appendChild(doc.createTextNode(ing.getID() + ""));
                 ingredients.appendChild(id);
+                p.println(ing.getID());
 
                 Element name = doc.createElement("name");
                 name.appendChild(doc.createTextNode(ing.getName()));
                 ingredients.appendChild(name);
+                p.println(ing.getName());
 
                 Element formattedName = doc.createElement("formattedName");
                 formattedName.appendChild(doc.createTextNode(ing.getFormattedName()));
                 ingredients.appendChild(formattedName);
+                p.println(ing.getFormattedName());
 
                 Element unitName = doc.createElement("unitName");
                 unitName.appendChild(doc.createTextNode(ing.getUnit()));
                 ingredients.appendChild(unitName);
+                p.println(ing.getUnit());
 
                 Element unitNum = doc.createElement("unitNum");
                 unitNum.appendChild(doc.createTextNode(ing.getUnitNum() + ""));
                 ingredients.appendChild(unitNum);
+                p.println(ing.getUnitNum());
 
                 Element fractionName = doc.createElement("fractionName");
                 fractionName.appendChild(doc.createTextNode(ing.getFractionName()));
                 ingredients.appendChild(fractionName);
+                p.println(ing.getFractionName());
 
                 Element fractionNum = doc.createElement("fractionNum");
                 fractionNum.appendChild(doc.createTextNode(ing.getFractionNum() + ""));
                 ingredients.appendChild(fractionNum);
+                p.println(ing.getFractionNum());
 
                 Element quantity = doc.createElement("quantity");
                 quantity.appendChild(doc.createTextNode(ing.getQuantity() + ""));
                 ingredients.appendChild(quantity);
+                p.println(ing.getQuantity());
 
                 for (int j = 0; j < ing.getMeasures().size(); j++) {
                     Element measures = doc.createElement("measures");
@@ -143,14 +164,17 @@ public class Database {
                     Element measureID = doc.createElement("id");
                     measureID.appendChild(doc.createTextNode(m.getID() + ""));
                     measures.appendChild(measureID);
+                    p.println(m.getID());
 
                     Element conversion = doc.createElement("conversion");
                     conversion.appendChild(doc.createTextNode(m.getConversion() + ""));
                     measures.appendChild(conversion);
+                    p.println(m.getConversion());
 
                     Element measureName = doc.createElement("measureName");
                     measureName.appendChild(doc.createTextNode(m.getName()));
                     measures.appendChild(measureName);
+                    p.println(m.getName());
                 }
             }
             // write the content into xml file
@@ -158,13 +182,14 @@ public class Database {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             StreamResult result;
-            if (!file.toString().substring(file.toString().length() - 3, file.toString().length()).equals(".xml")) {
+            if (!file.toString().substring(file.toString().length() - 4, file.toString().length()).equals(".xml")) {
                 result = new StreamResult(file + ".xml");
             } else {
                 result = new StreamResult(file);
             }
             transformer.transform(source, result);
             System.out.println("File saved!");
+            p.close();
         } catch (ParserConfigurationException | TransformerException ex) {
             System.out.println("XML Error: " + ex.toString());
         }
@@ -258,7 +283,7 @@ public class Database {
             output += "\r\n\r\n";
         }
         if (!label) {//print out the info if its not a label
-            Reader r = new Reader("data\\NT_NM.txt");
+            Reader r = new Reader("data//NT_NM.txt");
             int length = r.getLength();
             for (int i = 0; i < length; i++) {
                 Object aobj[] = r.getNextLine();
@@ -387,20 +412,20 @@ public class Database {
         int temp;
         int counter;
         System.out.println("Getting conversion rates for food ID = " + ID);
-        Reader r = new Reader("data\\CONV_FAC.txt");
-        int length = r.getLength();
+        Reader r = new Reader("data//CONV_FAC.txt");
+        int length = r.getLength() - 1;
         for (int i = 0; i < length; i++) {
             Object aobj[] = r.getNextLine();
-            temp = (int) aobj[0];
+            temp = Integer.parseInt(aobj[0].toString());
             //get the measure conversion factor and measure ID
-            if (ID == temp) {
-                GUI.recipe.getSingleIngredientID(ID).addMeasure((int) aobj[1], (double) aobj[2]);
+            if (ID == temp && Integer.parseInt(aobj[1].toString()) != 1572) {
+                GUI.recipe.getSingleIngredientID(ID).addMeasure(Integer.parseInt(aobj[1].toString()), Double.parseDouble(aobj[2].toString()));
             }
 
         }
         counter = 0;
-        r = new Reader("data\\MEASURE.txt");
-        length = r.getLength();
+        r = new Reader("data//MEASURE.txt");
+        length = r.getLength() - 1;
         for (int i = 0; i < length; i++) {
             Object aobj[] = r.getNextLine();
             if (GUI.recipe.getSingleIngredientID(ID).getMeasures().size() == counter) {
@@ -409,7 +434,7 @@ public class Database {
             //get the measure name
             //temp = Double.parseDouble(conversionRates.get(counter)[0].toString());
             int measureID = GUI.recipe.getSingleIngredientID(ID).getSingleMeasureIndex(counter).getID();
-            temp = (int) aobj[0];
+            temp = Integer.parseInt(aobj[0].toString());
             if (measureID == temp && measureID != 1572) {
                 // conversionRates.get(counter)[2] = aobj[1];//Add measure Name
                 GUI.recipe.getSingleIngredientID(ID).getSingleMeasureID(temp).setName(aobj[1].toString());
@@ -571,7 +596,7 @@ public class Database {
                 counter = 0;
         double tempd;
         Double[] nutrients = new Double[870];
-        Reader r = new Reader("data\\NT_AMT.txt");
+        Reader r = new Reader("data//NT_AMT.txt");
         int length = r.getLength();
         for (int i = 0; i < length; i++) {
             Object aobj[] = r.getNextLine();
