@@ -26,7 +26,7 @@ public class SortingAlgorithm {
             listLong[i] = add;//add to list
         }
         String[] list = {"WOOD", "TREES", "LEAF", "BARK", "WORLD", "TREE", "ARMS", "ARM", "ARMY", "A", "AA", "AAA", "ABA"};
-        sort(listLong);
+        sort(list);
     }
 
     public static void sort(String[] list) {
@@ -58,12 +58,19 @@ public class SortingAlgorithm {
                 }
             }
         }
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
-        }
+//        for (int i = 0; i < list.length; i++) {
+//            System.out.println(list[i]);
+//        }
     }
 
     public static int getChar(String s, int index) {
+        if ((s.charAt(index) < 65 || (s.charAt(index) > 90 && s.charAt(index) < 97) || s.charAt(index) > 122) && s.charAt(index) != 32) {
+            try {
+                throw new Exception("Incompatable String'" + s.charAt(index) + "'");
+            } catch (Exception ex) {
+               // System.out.println("Error: " + ex.toString());
+            }
+        }
         if ((int) s.charAt(index) > 96) {//if its lowercase, make it look like upper
             return (int) s.charAt(index) - 32;
         } else {

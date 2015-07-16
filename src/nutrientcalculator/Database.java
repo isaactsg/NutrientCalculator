@@ -85,9 +85,7 @@ public class Database {
      * @param The file path
      */
     public static void save(File file) throws FileNotFoundException {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        PrintWriter p = new PrintWriter(file + ".txt");
+        //PrintWriter p = new PrintWriter(file + ".txt");
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -97,15 +95,15 @@ public class Database {
             Element rootElement = doc.createElement("recipe");
             doc.appendChild(rootElement);
 
-            // title element
+//             title element
             Element title = doc.createElement("title");
             title.appendChild(doc.createTextNode(GUI.recipe.getTitle()));
-            p.println(GUI.recipe.getTitle());
+//            p.println(GUI.recipe.getTitle());
             rootElement.appendChild(title);
-            // title element
+//             title element
             Element instructions = doc.createElement("instructions");
             instructions.appendChild(doc.createTextNode(GUI.recipe.getInstructions()));
-            p.println(GUI.recipe.getInstructions());
+//            p.println(GUI.recipe.getInstructions());
             rootElement.appendChild(instructions);
 
             for (int i = 0; i < GUI.recipe.getIngredients().size(); i++) {
@@ -116,42 +114,42 @@ public class Database {
                 Element id = doc.createElement("ID");
                 id.appendChild(doc.createTextNode(ing.getID() + ""));
                 ingredients.appendChild(id);
-                p.println(ing.getID());
+//                p.println(ing.getID());
 
                 Element name = doc.createElement("name");
                 name.appendChild(doc.createTextNode(ing.getName()));
                 ingredients.appendChild(name);
-                p.println(ing.getName());
+//                p.println(ing.getName());
 
                 Element formattedName = doc.createElement("formattedName");
                 formattedName.appendChild(doc.createTextNode(ing.getFormattedName()));
                 ingredients.appendChild(formattedName);
-                p.println(ing.getFormattedName());
+//                p.println(ing.getFormattedName());
 
                 Element unitName = doc.createElement("unitName");
                 unitName.appendChild(doc.createTextNode(ing.getUnit()));
                 ingredients.appendChild(unitName);
-                p.println(ing.getUnit());
+//                p.println(ing.getUnit());
 
                 Element unitNum = doc.createElement("unitNum");
                 unitNum.appendChild(doc.createTextNode(ing.getUnitNum() + ""));
                 ingredients.appendChild(unitNum);
-                p.println(ing.getUnitNum());
+//                p.println(ing.getUnitNum());
 
                 Element fractionName = doc.createElement("fractionName");
                 fractionName.appendChild(doc.createTextNode(ing.getFractionName()));
                 ingredients.appendChild(fractionName);
-                p.println(ing.getFractionName());
+//                p.println(ing.getFractionName());
 
                 Element fractionNum = doc.createElement("fractionNum");
                 fractionNum.appendChild(doc.createTextNode(ing.getFractionNum() + ""));
                 ingredients.appendChild(fractionNum);
-                p.println(ing.getFractionNum());
+//                p.println(ing.getFractionNum());
 
                 Element quantity = doc.createElement("quantity");
                 quantity.appendChild(doc.createTextNode(ing.getQuantity() + ""));
                 ingredients.appendChild(quantity);
-                p.println(ing.getQuantity());
+//                p.println(ing.getQuantity());
 
                 for (int j = 0; j < ing.getMeasures().size(); j++) {
                     Element measures = doc.createElement("measures");
@@ -161,17 +159,17 @@ public class Database {
                     Element measureID = doc.createElement("id");
                     measureID.appendChild(doc.createTextNode(m.getID() + ""));
                     measures.appendChild(measureID);
-                    p.println(m.getID());
+//                    p.println(m.getID());
 
                     Element conversion = doc.createElement("conversion");
                     conversion.appendChild(doc.createTextNode(m.getConversion() + ""));
                     measures.appendChild(conversion);
-                    p.println(m.getConversion());
+//                    p.println(m.getConversion());
 
                     Element measureName = doc.createElement("measureName");
                     measureName.appendChild(doc.createTextNode(m.getName()));
                     measures.appendChild(measureName);
-                    p.println(m.getName());
+//                    p.println(m.getName());
                 }
             }
             // write the content into xml file
@@ -186,7 +184,7 @@ public class Database {
             }
             transformer.transform(source, result);
             System.out.println("File saved!");
-            p.close();
+//            p.close();
         } catch (ParserConfigurationException | TransformerException ex) {
             System.out.println("XML Error: " + ex.toString());
         }
