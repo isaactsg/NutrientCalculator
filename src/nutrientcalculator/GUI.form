@@ -287,7 +287,7 @@
                 </Property>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Recipe Nutrient Analysis&#xa;v1.2.1&#xa;July 12 2015&#xa;By Isaac Wismer&#xa;&#xa;This program uses the Canadian Nutrient File 2010&#xa;For more information visit:&#xa;http://www.hc-sc.gc.ca/fn-an/nutrition/&#xa;&#x9;fiche-nutri-data/index-eng.php&#xa;Please do not distribute&#xa;To report a bug please email idw.wismer@gmail.com"/>
+                <Property name="text" type="java.lang.String" value="Recipe Nutrient Analysis&#xa;v1.3.0&#xa;July 12 2015&#xa;By Isaac Wismer&#xa;&#xa;This program uses the Canadian Nutrient File 2010&#xa;For more information visit:&#xa;http://www.hc-sc.gc.ca/fn-an/nutrition/&#xa;&#x9;fiche-nutri-data/index-eng.php&#xa;Please do not distribute&#xa;To report a bug please email idw.wismer@gmail.com"/>
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

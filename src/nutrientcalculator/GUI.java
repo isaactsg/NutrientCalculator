@@ -279,7 +279,7 @@ public class GUI extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Recipe Nutrient Analysis\nv1.2.1\nJuly 12 2015\nBy Isaac Wismer\n\nThis program uses the Canadian Nutrient File 2010\nFor more information visit:\nhttp://www.hc-sc.gc.ca/fn-an/nutrition/\n\tfiche-nutri-data/index-eng.php\nPlease do not distribute\nTo report a bug please email idw.wismer@gmail.com");
+        jTextArea1.setText("Recipe Nutrient Analysis\nv1.3.0\nJuly 12 2015\nBy Isaac Wismer\n\nThis program uses the Canadian Nutrient File 2010\nFor more information visit:\nhttp://www.hc-sc.gc.ca/fn-an/nutrition/\n\tfiche-nutri-data/index-eng.php\nPlease do not distribute\nTo report a bug please email idw.wismer@gmail.com");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
         jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
