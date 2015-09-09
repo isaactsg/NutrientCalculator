@@ -15,12 +15,12 @@ public class Reader {
     private InputStream in;
     private final String fileurl;
     private int fields = 1;
-    //the delimiter used in the files
+    //the delimiter used in the files ("#" doesn't appear but "'", ";", ":" and "." all appear
     private final String delimiter = "#";
 
     public Reader(String s) {
         fileurl = s;
-        reset();
+        reset();//init the reader
     }
 
     public Object[] getNextLine() {
@@ -34,9 +34,9 @@ public class Reader {
         //create an array with as many indexes as there are fields
         Object[] line = new Object[fields];
         //put the information into the fields
-        for (int i = 0; i < fields - 1; i++) {
-            line[i] = s.substring(0, s.indexOf(delimiter));
-            s = s.substring(s.indexOf(delimiter) + 1);
+        for (int i = 0; i < fields - 1; i++) {//go through each of the fields in the line
+            line[i] = s.substring(0, s.indexOf(delimiter));//add the field
+            s = s.substring(s.indexOf(delimiter) + 1);//remove it from the string
         }
         line[fields - 1] = s;
         return line;
@@ -48,7 +48,6 @@ public class Reader {
         int c = 0;
         //count the number of lines in the file
         try {
-            String s = "";
             do {
                 c++;
             } while (br.readLine() != null);
