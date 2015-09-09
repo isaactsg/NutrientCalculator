@@ -62,9 +62,11 @@ public class Reader {
 
     private void reset() {
         //initialize the reader
+        System.out.println("GREAT");
         in = Reader.class.getResourceAsStream(fileurl);
         isr = new InputStreamReader(in);
         br = new BufferedReader(isr);
+        System.out.println("GOOD");
         //count the number of fields
         String s = "";
         try {
@@ -73,6 +75,7 @@ public class Reader {
         } catch (IOException ex) {
             System.out.println("File Error: " + ex);
         }
+        System.out.println(s);
         fields = 1;
         //minimum of one field
         //count the number of additional fields
