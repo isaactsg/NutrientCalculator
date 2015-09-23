@@ -28,12 +28,11 @@ public class Database {
     static DecimalFormat oneDecimal = new DecimalFormat("#,##0.0");
 
     //main method for bug testing
-
     /**
      *
      * @param args
      */
-        public static void main(String args[]) {
+    public static void main(String args[]) {
         Reader r = new Reader("data//FOOD_NM.txt");
         int length = r.getLength();
         for (int i = 0; i < length; i++) {
@@ -43,9 +42,10 @@ public class Database {
     }
 
     /**
+     * Searches the list of ingredients for the keyword
      *
-     * @param keyword
-     * @return
+     * @param keyword the word(s) to search with
+     * @return a list of the matches
      */
     public static ArrayList<Ingredient> search(String keyword) {
         double temp;
@@ -91,16 +91,12 @@ public class Database {
         return match;
     }//End searchByName()
 
-    /* This method saves the recipe to a file
-     * @param The file path
-     */
-
     /**
+     * This method saves the recipe to a file
      *
-     * @param file
+     * @param file The file path
      * @throws FileNotFoundException
      */
-    
     public static void save(File file) throws FileNotFoundException {
         //PrintWriter p = new PrintWriter(file + ".txt");
         try {
@@ -207,15 +203,12 @@ public class Database {
         }
     }//End save()
 
-    /* This method opens a saved recipe and re-assings the variable with the new data
-     * @param The file path
-     */
-
     /**
+     * This method opens a saved recipe and re-assings the variable with the new
+     * data
      *
-     * @param file
+     * @param file The file path
      */
-    
     public static void open(File file) {
         System.out.println(file);
         try {
@@ -281,18 +274,17 @@ public class Database {
     }//end open()
 
     /* This method creates the output that will be displayed for the user
-     * @param the array with nutrient information, the name of the food, the index of the convertion rate and whether or not it is a custom portion
-     * @return a string with the formatted output
+     * @param 
+     * @return 
      */
-
     /**
      *
-     * @param recipe
+     * @param recipe The entire recipe with all ingredient and measure
+     * information
      * @param recipeNutrients
-     * @param label
-     * @return
+     * @param label whether or not to print the information as a label
+     * @return a string with the formatted output
      */
-    
     public static String createOutput(Recipe recipe, Double[] recipeNutrients, boolean label) {
         String output;
         //make the title
@@ -410,8 +402,8 @@ public class Database {
 
     /**
      *
-     * @param ID
-     * @return
+     * @param ID the ID of the measure
+     * @return whether or not it can be measured in mL
      */
     public static boolean checkMeasuresML(int ID) {
         //get conversion rates
@@ -442,7 +434,7 @@ public class Database {
 
     /**
      *
-     * @param ID
+     * @param ID the ID of the measure
      */
     public static void getConv(int ID) {
         int temp;
@@ -484,8 +476,10 @@ public class Database {
     }//end getConv
 
     /**
+     * Not quite sure what this method does.... I'm not sure that it's ever
+     * called....
      *
-     * @param ID
+     * @param ID the ID of the measure
      * @return
      */
     public static DefaultComboBoxModel measures(int ID) {
@@ -500,18 +494,15 @@ public class Database {
         return measures;
     }//End convRate()
 
-    /* This method gets the information for each ingredient needed to create the label/output
-     * @param the array of the ingredients, whether or not it's a label, the number of servings and the english and french serving names
+    /**
+     * This method gets the information for each ingredient needed to create the
+     * label/output
+     *
+     * @param recipe The complete recipe with all the ingredient and measure
+     * info
+     * @param label a boolean stating whether or not to print as a label
      * @return a string with the output
      */
-
-    /**
-     *
-     * @param recipe
-     * @param label
-     * @return
-     */
-    
     public static String recipe(Recipe recipe, boolean label) {
         Double[] recipeNutrients = new Double[870], indiviual;
         double nutrientConv = 1.0, portionSize = 100.0;
@@ -636,17 +627,12 @@ public class Database {
         return createOutput(recipe, recipeNutrients, label);
     }//End recipe()
 
-    /* This method collects all the nutrient amounts
-     * @param the food ID of the food item
+    /**
+     * This method collects all the nutrient amounts
+     *
+     * @param ID the food ID of the food item
      * @return an array with the nutrient ID and the amount of that nutrient
      */
-
-    /**
-     *
-     * @param ID
-     * @return
-     */
-    
     public static Double[] getNutrientData(int ID) {
         int temp,
                 counter = 0;
