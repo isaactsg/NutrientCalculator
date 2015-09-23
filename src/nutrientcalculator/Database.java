@@ -19,12 +19,21 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+/**
+ *
+ * @author isaac
+ */
 public class Database {
 
     static DecimalFormat oneDecimal = new DecimalFormat("#,##0.0");
 
     //main method for bug testing
-    public static void main(String args[]) {
+
+    /**
+     *
+     * @param args
+     */
+        public static void main(String args[]) {
         Reader r = new Reader("data//FOOD_NM.txt");
         int length = r.getLength();
         for (int i = 0; i < length; i++) {
@@ -33,6 +42,11 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param keyword
+     * @return
+     */
     public static ArrayList<Ingredient> search(String keyword) {
         double temp;
         //create new arraylist for the matched
@@ -80,6 +94,13 @@ public class Database {
     /* This method saves the recipe to a file
      * @param The file path
      */
+
+    /**
+     *
+     * @param file
+     * @throws FileNotFoundException
+     */
+    
     public static void save(File file) throws FileNotFoundException {
         //PrintWriter p = new PrintWriter(file + ".txt");
         try {
@@ -189,6 +210,12 @@ public class Database {
     /* This method opens a saved recipe and re-assings the variable with the new data
      * @param The file path
      */
+
+    /**
+     *
+     * @param file
+     */
+    
     public static void open(File file) {
         System.out.println(file);
         try {
@@ -257,6 +284,15 @@ public class Database {
      * @param the array with nutrient information, the name of the food, the index of the convertion rate and whether or not it is a custom portion
      * @return a string with the formatted output
      */
+
+    /**
+     *
+     * @param recipe
+     * @param recipeNutrients
+     * @param label
+     * @return
+     */
+    
     public static String createOutput(Recipe recipe, Double[] recipeNutrients, boolean label) {
         String output;
         //make the title
@@ -372,6 +408,11 @@ public class Database {
         return output;
     }//End createOutput()
 
+    /**
+     *
+     * @param ID
+     * @return
+     */
     public static boolean checkMeasuresML(int ID) {
         //get conversion rates
         getConv(ID);
@@ -399,6 +440,10 @@ public class Database {
         return false;
     }//End checkMeasurementML()
 
+    /**
+     *
+     * @param ID
+     */
     public static void getConv(int ID) {
         int temp;
         int counter;
@@ -438,6 +483,11 @@ public class Database {
         }
     }//end getConv
 
+    /**
+     *
+     * @param ID
+     * @return
+     */
     public static DefaultComboBoxModel measures(int ID) {
         //get the conversion rates for the ingredient
         //getConv(ID);
@@ -454,6 +504,14 @@ public class Database {
      * @param the array of the ingredients, whether or not it's a label, the number of servings and the english and french serving names
      * @return a string with the output
      */
+
+    /**
+     *
+     * @param recipe
+     * @param label
+     * @return
+     */
+    
     public static String recipe(Recipe recipe, boolean label) {
         Double[] recipeNutrients = new Double[870], indiviual;
         double nutrientConv = 1.0, portionSize = 100.0;
@@ -582,6 +640,13 @@ public class Database {
      * @param the food ID of the food item
      * @return an array with the nutrient ID and the amount of that nutrient
      */
+
+    /**
+     *
+     * @param ID
+     * @return
+     */
+    
     public static Double[] getNutrientData(int ID) {
         int temp,
                 counter = 0;

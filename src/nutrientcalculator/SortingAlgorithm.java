@@ -5,8 +5,16 @@ package nutrientcalculator;
 
 import java.util.Random;
 
+/**
+ *
+ * @author isaac
+ */
 public class SortingAlgorithm {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         String[] listLong = new String[1000];//1000 strings to sort
         for (int i = 0; i < 1000; i++) {//make 100 random strings
@@ -29,6 +37,10 @@ public class SortingAlgorithm {
         sort(list);
     }
 
+    /**
+     *
+     * @param list
+     */
     public static void sort(String[] list) {
         for (int j = 0; j < list.length; j++) {//repeat the sort the length of the string (so the bottom could get to the top or vice versa
             for (int i = 0; i < list.length - 1; i++) {//go through the list once
@@ -63,6 +75,12 @@ public class SortingAlgorithm {
 //        }
     }
 
+    /**
+     *
+     * @param s
+     * @param index
+     * @return
+     */
     public static int getChar(String s, int index) {
         if ((s.charAt(index) < 65 || (s.charAt(index) > 90 && s.charAt(index) < 97) || s.charAt(index) > 122) && s.charAt(index) != 32) {
             try {
