@@ -3,6 +3,10 @@
  */
 package nutrientcalculator;
 
+/**
+ *
+ * @author isaac
+ */
 public class Loading implements Runnable {
 
     @Override
@@ -18,6 +22,9 @@ public class Loading implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     public static void start() {
         (new Thread(new Loading())).start();
     }

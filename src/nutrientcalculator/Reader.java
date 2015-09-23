@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ *
+ * @author isaac
+ */
 public class Reader {
 
     private BufferedReader br;
@@ -18,11 +22,19 @@ public class Reader {
     //the delimiter used in the files ("#" doesn't appear but "'", ";", ":" and "." all appear
     private final String delimiter = "#";
 
+    /**
+     *
+     * @param s
+     */
     public Reader(String s) {
         fileurl = s;
         reset();//init the reader
     }
 
+    /**
+     *
+     * @return
+     */
     public Object[] getNextLine() {
         String s = "";
         try {
@@ -42,6 +54,10 @@ public class Reader {
         return line;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLength() {
         //put the buffered reader back to the top of the file
         reset();
