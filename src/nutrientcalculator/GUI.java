@@ -1234,7 +1234,7 @@ public class GUI extends javax.swing.JFrame {
             cmbFraction.setEnabled(false);
         }
         if (selected.getMeasures().isEmpty()) {
-            JOptionPane.showMessageDialog(frameRecepieEntry, "Error: No measures available.\nCannot use ingredient; Please choose another.\nBlame the person who made the database.", "Error: No Measures", WIDTH);
+            JOptionPane.showMessageDialog(frameRecepieEntry, "Error: No measures available.\nCannot use ingredient; Please choose another.\nBlame the person who made the database.", "Error: No Measures", 1);
         } else {
             if (!edit) {
                 selected = recipe.getSingleIngredientIndex(recipe.getIngredients().size() - 1);

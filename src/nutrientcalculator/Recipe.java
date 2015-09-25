@@ -2,7 +2,7 @@
  *  Jun 14, 2015
  */
 /*
- * Add in .print for ingredients so thati can print easily
+ * Add in .print for ingredients so that i can print easily
  */
 package nutrientcalculator;
 
@@ -23,8 +23,8 @@ public class Recipe {
 
     /**
      *
-     * @param title
-     * @param instructions
+     * @param title the Title of the recipe
+     * @param instructions the instructions for the recipe
      */
     public Recipe(String title, String instructions) {
         this.title = title;
@@ -33,21 +33,21 @@ public class Recipe {
 
     /**
      *
-     * @param title
+     * @param title the title of the recipe
      */
     public Recipe(String title) {
         this.title = title;
     }
 
     /**
-     *
+     * the default constructor
      */
     public Recipe() {
     }
 
     /**
      *
-     * @return
+     * @return the title of the recipe
      */
     public String getTitle() {
         return title;
@@ -55,7 +55,7 @@ public class Recipe {
 
     /**
      *
-     * @param title
+     * @param title the title of the recipe
      */
     public void setTitle(String title) {
         this.title = title;
@@ -63,7 +63,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the instructions for the recipe
      */
     public String getInstructions() {
         return instructions;
@@ -71,7 +71,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the number of ingredients
      */
     public int size() {
         return ingredients.size();
@@ -79,7 +79,7 @@ public class Recipe {
 
     /**
      *
-     * @param instructions
+     * @param instructions instructions for the recipe
      */
     public void setInstructions(String instructions) {
         this.instructions = instructions;
@@ -87,7 +87,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the english name for the servings
      */
     public String getServingEng() {
         return servingEng;
@@ -95,7 +95,7 @@ public class Recipe {
 
     /**
      *
-     * @param servingEng
+     * @param servingEng the english name for the serving
      */
     public void setServingEng(String servingEng) {
         this.servingEng = servingEng;
@@ -103,7 +103,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the french name for the serving
      */
     public String getServingFre() {
         return servingFre;
@@ -111,7 +111,7 @@ public class Recipe {
 
     /**
      *
-     * @param servingFre
+     * @param servingFre the french name for the serving
      */
     public void setServingFre(String servingFre) {
         this.servingFre = servingFre;
@@ -119,7 +119,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the number of servings it makes
      */
     public int getServings() {
         return servings;
@@ -127,7 +127,7 @@ public class Recipe {
 
     /**
      *
-     * @param servings
+     * @param servings the number of servings it makes
      */
     public void setServings(int servings) {
         this.servings = servings;
@@ -135,7 +135,7 @@ public class Recipe {
 
     /**
      *
-     * @param ingred
+     * @param ingred an ingredient object to add to the recipe
      */
     public void addIngredient(Ingredient ingred) {
         ingredients.add(ingred);
@@ -143,8 +143,8 @@ public class Recipe {
 
     /**
      *
-     * @param index
-     * @param ingred
+     * @param index the index to overwrite/place the ingredient at
+     * @param ingred the ingredient to place
      */
     public void setSingleIngredient(int index, Ingredient ingred) {
         ingredients.set(index, ingred);
@@ -152,7 +152,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the entire array of ingredients
      */
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
@@ -160,7 +160,7 @@ public class Recipe {
 
     /**
      *
-     * @param ingredients
+     * @param ingredients the entire array of ingredients
      */
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
@@ -168,8 +168,8 @@ public class Recipe {
 
     /**
      *
-     * @param index
-     * @return
+     * @param index the index of the ingredient
+     * @return the ingredient object from the specified index
      */
     public Ingredient getSingleIngredientIndex(int index) {
         return ingredients.get(index);
@@ -177,8 +177,8 @@ public class Recipe {
 
     /**
      *
-     * @param ID
-     * @return
+     * @param ID the ID of the ingredient you want
+     * @return the ingredient with the matching ID
      */
     public Ingredient getSingleIngredientID(int ID) {
         for (int i = 0; i < ingredients.size(); i++) {
@@ -191,7 +191,7 @@ public class Recipe {
 
     /**
      *
-     * @param index
+     * @param index the index of the ingredient to remove
      */
     public void remove(int index) {
         ingredients.remove(index);
@@ -199,7 +199,7 @@ public class Recipe {
 
     /**
      *
-     * @return
+     * @return the list of ingredients for a combobox
      */
     public DefaultComboBoxModel getList() {
         return list;
@@ -207,7 +207,7 @@ public class Recipe {
 
     /**
      *
-     * @param list
+     * @param list the list of ingredients for a combobox
      */
     public void setList(DefaultComboBoxModel list) {
         this.list = list;
@@ -215,7 +215,7 @@ public class Recipe {
 
     /**
      *
-     * @param item
+     * @param item the item to be added to the list
      */
     public void addListItem(String item) {
         list.addElement(item);
@@ -223,8 +223,8 @@ public class Recipe {
 
     /**
      *
-     * @param r
-     * @return
+     * @param r another recipe
+     * @return whether or not they are equal
      */
     public boolean equals(Recipe r) {
         if (r == null) {
