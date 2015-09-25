@@ -23,7 +23,7 @@ public class Loading implements Runnable {
     }
 
     /**
-     *
+     * starts the loading image
      */
     public static void start() {
         (new Thread(new Loading())).start();

@@ -39,7 +39,7 @@ public class SortingAlgorithm {
 
     /**
      *
-     * @param list
+     * @param list an array with the strings to sort
      */
     public static void sort(String[] list) {
         for (int j = 0; j < list.length; j++) {//repeat the sort the length of the string (so the bottom could get to the top or vice versa
@@ -76,10 +76,10 @@ public class SortingAlgorithm {
     }
 
     /**
-     *
-     * @param s
-     * @param index
-     * @return
+     * given a char this will make it lower case
+     * @param s to get a char from
+     * @param index the index of the char
+     * @return the lower case of the letter
      */
     public static int getChar(String s, int index) {
         if ((s.charAt(index) < 65 || (s.charAt(index) > 90 && s.charAt(index) < 97) || s.charAt(index) > 122) && s.charAt(index) != 32) {

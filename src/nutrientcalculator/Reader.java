@@ -24,7 +24,7 @@ public class Reader {
 
     /**
      *
-     * @param s
+     * @param s the file path
      */
     public Reader(String s) {
         fileurl = s;
@@ -33,7 +33,7 @@ public class Reader {
 
     /**
      *
-     * @return
+     * @return an object with each index containing one field
      */
     public Object[] getNextLine() {
         String s = "";
@@ -56,7 +56,7 @@ public class Reader {
 
     /**
      *
-     * @return
+     * @return the number of lines in the file
      */
     public int getLength() {
         //put the buffered reader back to the top of the file

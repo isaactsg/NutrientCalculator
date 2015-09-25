@@ -15,8 +15,8 @@ public class Measures {
 
     /**
      *
-     * @param ID
-     * @param conversion
+     * @param ID The measure ID
+     * @param conversion the measure conversion rate
      */
     public Measures(int ID, double conversion) {
         this.ID = ID;
@@ -24,14 +24,14 @@ public class Measures {
     }
 
     /**
-     *
+     * the default constructor
      */
     public Measures() {
     }
 
     /**
      *
-     * @return
+     * @return the ID
      */
     public int getID() {
         return ID;
@@ -39,7 +39,7 @@ public class Measures {
 
     /**
      *
-     * @param ID
+     * @param ID the ID of the measure
      */
     public void setID(int ID) {
         this.ID = ID;
@@ -47,7 +47,7 @@ public class Measures {
 
     /**
      *
-     * @return
+     * @return the Conversion
      */
     public double getConversion() {
         return conversion;
@@ -55,7 +55,7 @@ public class Measures {
 
     /**
      *
-     * @param conversion
+     * @param conversion the measure conversion rate
      */
     public void setConversion(double conversion) {
         this.conversion = conversion;
@@ -63,7 +63,7 @@ public class Measures {
 
     /**
      *
-     * @return
+     * @return the name of the measure
      */
     public String getName() {
         return name;
@@ -71,7 +71,7 @@ public class Measures {
 
     /**
      *
-     * @param name
+     * @param name the name of the measure
      */
     public void setName(String name) {
         this.name = name;
