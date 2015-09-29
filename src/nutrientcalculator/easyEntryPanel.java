@@ -5,16 +5,20 @@
  */
 package nutrientcalculator;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author isaac
  */
 public class easyEntryPanel extends javax.swing.JPanel {
-
+    GUI home;
     /**
      * Creates new form easyEntryPanel
+     * @param theGUI
      */
-    public easyEntryPanel() {
+    public easyEntryPanel(GUI theGUI) {
+        home = theGUI;
         initComponents();
     }
 
@@ -32,6 +36,8 @@ public class easyEntryPanel extends javax.swing.JPanel {
         jComboBox4 = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+
+        setName("Panel"); // NOI18N
 
         jComboBox3.setToolTipText("Enter the ingredient here");
 
@@ -77,9 +83,12 @@ public class easyEntryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        home.frameEasyEntry.getContentPane().add(new easyEntryPanel(home));
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

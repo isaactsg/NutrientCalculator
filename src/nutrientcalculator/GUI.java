@@ -7,6 +7,8 @@
  */
 package nutrientcalculator;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -34,6 +36,7 @@ public class GUI extends javax.swing.JFrame {
         frameTitle.setLocationRelativeTo(null);
         lblLoad.setVisible(false);
         framePrint.setLocationRelativeTo(null);
+        c = new Container();
 
     }
     //static variables
@@ -42,12 +45,14 @@ public class GUI extends javax.swing.JFrame {
     static Recipe recipe = new Recipe();
     static DefaultComboBoxModel model = new DefaultComboBoxModel();
     ArrayList<Ingredient> ingList = new ArrayList<>(0);
+    Container c;
     //non static variables
     Ingredient selected;
     int numIngredients, editSelection = 0;
     boolean edit = false, dontShow = false;
     ArrayList<Object[]> matches = new ArrayList<>(0);
     ArrayList<Ingredient> matchesIngr;
+    public ArrayList<easyEntryPanel> panels;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,12 +111,7 @@ public class GUI extends javax.swing.JFrame {
         menuHelp = new javax.swing.JMenu();
         menuAbout = new javax.swing.JMenu();
         frameEasyEntry = new javax.swing.JFrame();
-        panelIngred = new javax.swing.JPanel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
         btnRemove = new javax.swing.JButton();
         btnCalculate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
@@ -540,63 +540,26 @@ public class GUI extends javax.swing.JFrame {
         frameEasyEntry.setMinimumSize(new java.awt.Dimension(875, 550));
         frameEasyEntry.setPreferredSize(new java.awt.Dimension(875, 550));
 
-        jComboBox3.setToolTipText("Enter the ingredient here");
-
-        jComboBox4.setToolTipText("Enter the measurement here");
-
-        jButton2.setText("Check");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelIngredLayout = new javax.swing.GroupLayout(panelIngred);
-        panelIngred.setLayout(panelIngredLayout);
-        panelIngredLayout.setHorizontalGroup(
-            panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2)
-                    .addGroup(panelIngredLayout.createSequentialGroup()
-                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, 586, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 875, Short.MAX_VALUE)
         );
-        panelIngredLayout.setVerticalGroup(
-            panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout frameEasyEntryLayout = new javax.swing.GroupLayout(frameEasyEntry.getContentPane());
         frameEasyEntry.getContentPane().setLayout(frameEasyEntryLayout);
         frameEasyEntryLayout.setHorizontalGroup(
             frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameEasyEntryLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(panelIngred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         frameEasyEntryLayout.setVerticalGroup(
             frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(frameEasyEntryLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelIngred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(485, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -811,7 +774,17 @@ public class GUI extends javax.swing.JFrame {
         if (menuCheckEasyEntry.isSelected()) {
             frameEasyEntry.setLocationRelativeTo(this);
             frameEasyEntry.setVisible(true);
-            frameEasyEntry.add(new easyEntryPanel());
+            //panels = new ArrayList<>();
+            easyEntryPanel panel = new easyEntryPanel(this);
+            //frameEasyEntry.setContentPane(jPanel1);
+            //frameEasyEntry.getContentPane().add(panel);
+            c=frameEasyEntry.getContentPane();
+            c.add(panel, BorderLayout.NORTH);
+            c.add(new JLabel("HI"));
+            frameEasyEntry.setVisible(true);
+            //frameEasyEntry.setContentPane(jPanel1);
+            //frameEasyEntry.getContentPane().add(new JLabel("HI"));
+            //frameEasyEntry.getContentPane().add(panel);
         } else {
             //reset the add ingredient window
             DefaultListModel empty = new DefaultListModel();
@@ -1099,16 +1072,6 @@ public class GUI extends javax.swing.JFrame {
     private void menuCheckEasyEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCheckEasyEntryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuCheckEasyEntryActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JPanel j = new JPanel();
-        for (int i = 0; i < panelIngred.getComponentCount(); i++) {
-            System.out.println(panelIngred.getComponentCount() + ":" + i);
-            j.add(panelIngred.getComponent(i));
-            
-        }
-        j.setLocation(panelIngred.getX(), panelIngred.getY() + 50);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * This method searches using the string provided by the user THIS HAS BEEN
@@ -1453,9 +1416,6 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JFrame framePrint;
     public static javax.swing.JFrame frameRecepieEntry;
     public static javax.swing.JFrame frameTitle;
-    public static javax.swing.JButton jButton2;
-    public static javax.swing.JComboBox jComboBox3;
-    public static javax.swing.JComboBox jComboBox4;
     public static javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
@@ -1464,6 +1424,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JMenuBar jMenuBar2;
     public static javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JMenuItem jMenuItem2;
+    public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPopupMenu jPopupMenu1;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JScrollPane jScrollPane2;
@@ -1471,8 +1432,6 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JScrollPane jScrollPane4;
     public static javax.swing.JScrollPane jScrollPane5;
     public static javax.swing.JScrollPane jScrollPane6;
-    public static javax.swing.JSeparator jSeparator2;
-    public static javax.swing.JSpinner jSpinner2;
     public static javax.swing.JTextArea jTextArea1;
     public static javax.swing.JLabel lblLoad;
     public static javax.swing.JList listRecipe;
@@ -1487,7 +1446,6 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JMenu menuSave;
     public static javax.swing.JMenu menuSave1;
     public static javax.swing.JTextArea output;
-    public static javax.swing.JPanel panelIngred;
     public static javax.swing.JScrollPane scrollPane;
     public static javax.swing.JSpinner spQuantity;
     public static javax.swing.JTextArea taDirections;
