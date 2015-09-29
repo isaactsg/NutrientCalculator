@@ -105,6 +105,13 @@ public class GUI extends javax.swing.JFrame {
         MenuPrint = new javax.swing.JMenu();
         menuHelp = new javax.swing.JMenu();
         menuAbout = new javax.swing.JMenu();
+        frameEasyEntry = new javax.swing.JFrame();
+        panelIngred = new javax.swing.JPanel();
+        jSpinner2 = new javax.swing.JSpinner();
+        jComboBox3 = new javax.swing.JComboBox();
+        jComboBox4 = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         btnRemove = new javax.swing.JButton();
         btnCalculate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
@@ -120,6 +127,8 @@ public class GUI extends javax.swing.JFrame {
         menuOpen1 = new javax.swing.JMenu();
         menuHelp1 = new javax.swing.JMenu();
         menuAbout1 = new javax.swing.JMenu();
+        menuOptions = new javax.swing.JMenu();
+        menuCheckEasyEntry = new javax.swing.JCheckBoxMenuItem();
 
         frameRecepieEntry.setTitle("Enter Ingredient");
         frameRecepieEntry.setMinimumSize(new java.awt.Dimension(1000, 510));
@@ -528,6 +537,68 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        frameEasyEntry.setMinimumSize(new java.awt.Dimension(875, 550));
+        frameEasyEntry.setPreferredSize(new java.awt.Dimension(875, 550));
+
+        jComboBox3.setToolTipText("Enter the ingredient here");
+
+        jComboBox4.setToolTipText("Enter the measurement here");
+
+        jButton2.setText("Check");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelIngredLayout = new javax.swing.GroupLayout(panelIngred);
+        panelIngred.setLayout(panelIngredLayout);
+        panelIngredLayout.setHorizontalGroup(
+            panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIngredLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addGroup(panelIngredLayout.createSequentialGroup()
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox3, 0, 586, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
+                .addContainerGap())
+        );
+        panelIngredLayout.setVerticalGroup(
+            panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIngredLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelIngredLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout frameEasyEntryLayout = new javax.swing.GroupLayout(frameEasyEntry.getContentPane());
+        frameEasyEntry.getContentPane().setLayout(frameEasyEntryLayout);
+        frameEasyEntryLayout.setHorizontalGroup(
+            frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameEasyEntryLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(panelIngred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        frameEasyEntryLayout.setVerticalGroup(
+            frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameEasyEntryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelIngred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(485, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Canadian Nutrient File Search");
         setIconImages(null);
@@ -651,6 +722,19 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenuBar2.add(menuAbout1);
 
+        menuOptions.setText("Options");
+
+        menuCheckEasyEntry.setSelected(true);
+        menuCheckEasyEntry.setText("Use Easy Entry");
+        menuCheckEasyEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCheckEasyEntryActionPerformed(evt);
+            }
+        });
+        menuOptions.add(menuCheckEasyEntry);
+
+        jMenuBar2.add(menuOptions);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -724,17 +808,23 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbUnitActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        //reset the add ingredient window
-        DefaultListModel empty = new DefaultListModel();
-        tfName.setText(null);
-        listResults.setModel(empty);
-        cmbUnit.setSelectedIndex(0);
-        cmbFraction.setEnabled(false);
-        cmbUnit.setEnabled(false);
-        spQuantity.setEnabled(false);
-        frameRecepieEntry.setVisible(true);
-        btnOK1.setEnabled(false);
-        edit = false;
+        if (menuCheckEasyEntry.isSelected()) {
+            frameEasyEntry.setLocationRelativeTo(this);
+            frameEasyEntry.setVisible(true);
+            frameEasyEntry.add(new easyEntryPanel());
+        } else {
+            //reset the add ingredient window
+            DefaultListModel empty = new DefaultListModel();
+            tfName.setText(null);
+            listResults.setModel(empty);
+            cmbUnit.setSelectedIndex(0);
+            cmbFraction.setEnabled(false);
+            cmbUnit.setEnabled(false);
+            spQuantity.setEnabled(false);
+            frameRecepieEntry.setVisible(true);
+            btnOK1.setEnabled(false);
+            edit = false;
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -1005,6 +1095,20 @@ public class GUI extends javax.swing.JFrame {
         }
         listResults.setModel(m);
     }//GEN-LAST:event_cmbCategoryActionPerformed
+
+    private void menuCheckEasyEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCheckEasyEntryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCheckEasyEntryActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JPanel j = new JPanel();
+        for (int i = 0; i < panelIngred.getComponentCount(); i++) {
+            System.out.println(panelIngred.getComponentCount() + ":" + i);
+            j.add(panelIngred.getComponent(i));
+            
+        }
+        j.setLocation(panelIngred.getX(), panelIngred.getY() + 50);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * This method searches using the string provided by the user THIS HAS BEEN
@@ -1344,10 +1448,14 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JFileChooser fcSave;
     public static javax.swing.JDialog frameAbout;
     public static javax.swing.JFrame frameDirections;
+    public static javax.swing.JFrame frameEasyEntry;
     public static javax.swing.JFrame frameHelp;
     public static javax.swing.JFrame framePrint;
     public static javax.swing.JFrame frameRecepieEntry;
     public static javax.swing.JFrame frameTitle;
+    public static javax.swing.JButton jButton2;
+    public static javax.swing.JComboBox jComboBox3;
+    public static javax.swing.JComboBox jComboBox4;
     public static javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
@@ -1363,18 +1471,23 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JScrollPane jScrollPane4;
     public static javax.swing.JScrollPane jScrollPane5;
     public static javax.swing.JScrollPane jScrollPane6;
+    public static javax.swing.JSeparator jSeparator2;
+    public static javax.swing.JSpinner jSpinner2;
     public static javax.swing.JTextArea jTextArea1;
     public static javax.swing.JLabel lblLoad;
     public static javax.swing.JList listRecipe;
     public static javax.swing.JList listResults;
     public static javax.swing.JMenu menuAbout;
     public static javax.swing.JMenu menuAbout1;
+    public static javax.swing.JCheckBoxMenuItem menuCheckEasyEntry;
     public static javax.swing.JMenu menuHelp;
     public static javax.swing.JMenu menuHelp1;
     public static javax.swing.JMenu menuOpen1;
+    public static javax.swing.JMenu menuOptions;
     public static javax.swing.JMenu menuSave;
     public static javax.swing.JMenu menuSave1;
     public static javax.swing.JTextArea output;
+    public static javax.swing.JPanel panelIngred;
     public static javax.swing.JScrollPane scrollPane;
     public static javax.swing.JSpinner spQuantity;
     public static javax.swing.JTextArea taDirections;
