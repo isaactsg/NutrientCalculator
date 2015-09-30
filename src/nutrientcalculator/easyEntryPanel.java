@@ -5,8 +5,6 @@
  */
 package nutrientcalculator;
 
-import java.awt.Graphics;
-
 /**
  *
  * @author isaac
@@ -83,12 +81,9 @@ public class easyEntryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        home.frameEasyEntry.getContentPane().add(new easyEntryPanel(home));
+        System.out.println(home.addPanel());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

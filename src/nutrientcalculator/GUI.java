@@ -36,6 +36,8 @@ public class GUI extends javax.swing.JFrame {
         frameTitle.setLocationRelativeTo(null);
         lblLoad.setVisible(false);
         framePrint.setLocationRelativeTo(null);
+        frameEasyEntry.setLocationRelativeTo(this);
+
         c = new Container();
 
     }
@@ -772,19 +774,23 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (menuCheckEasyEntry.isSelected()) {
-            frameEasyEntry.setLocationRelativeTo(this);
-            frameEasyEntry.setVisible(true);
-            //panels = new ArrayList<>();
-            easyEntryPanel panel = new easyEntryPanel(this);
+            panels = new ArrayList<>();
+            //easyEntryPanel panel = new easyEntryPanel(this);
             //frameEasyEntry.setContentPane(jPanel1);
             //frameEasyEntry.getContentPane().add(panel);
-            c=frameEasyEntry.getContentPane();
-            c.add(panel, BorderLayout.NORTH);
-            c.add(new JLabel("HI"));
+//            c = frameEasyEntry.getContentPane();
+//            c.add(panel, BorderLayout.NORTH);
+//            c.add(new JLabel("HI"));
             frameEasyEntry.setVisible(true);
             //frameEasyEntry.setContentPane(jPanel1);
             //frameEasyEntry.getContentPane().add(new JLabel("HI"));
             //frameEasyEntry.getContentPane().add(panel);
+            jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+            jPanel1.add(new easyEntryPanel(this));
+            jPanel1.revalidate();
+            //jLabel1.repaint();
+            //frameEasyEntry.revalidate();
+            //frameEasyEntry.repaint();
         } else {
             //reset the add ingredient window
             DefaultListModel empty = new DefaultListModel();
@@ -1333,6 +1339,17 @@ public class GUI extends javax.swing.JFrame {
             list.addElement(array[i]);
         }
         return list;
+    }
+
+    public boolean addPanel() {
+        //jPanel1.setLayout(new java.awt.BorderLayout());
+        panels.add(new easyEntryPanel(this));
+        System.out.println(jPanel1.getComponentCount());
+        jPanel1.add(panels.get(panels.size() - 1));
+        System.out.println(jPanel1.getComponentCount());
+        //panels.get(panels.size() - 1).setLocation(panels.get(panels.size() - 1).getX(), panels.get(panels.size() - 1).getY() + 50);
+        jPanel1.revalidate();
+        return true;
     }
 
     /**
