@@ -9,12 +9,14 @@ package nutrientcalculator;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -113,6 +115,7 @@ public class GUI extends javax.swing.JFrame {
         menuHelp = new javax.swing.JMenu();
         menuAbout = new javax.swing.JMenu();
         frameEasyEntry = new javax.swing.JFrame();
+        scroll = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         btnRemove = new javax.swing.JButton();
         btnCalculate = new javax.swing.JButton();
@@ -542,26 +545,34 @@ public class GUI extends javax.swing.JFrame {
         frameEasyEntry.setMinimumSize(new java.awt.Dimension(875, 550));
         frameEasyEntry.setPreferredSize(new java.awt.Dimension(875, 550));
 
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 875, Short.MAX_VALUE)
+            .addGap(0, 872, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 547, Short.MAX_VALUE)
         );
+
+        scroll.setViewportView(jPanel1);
 
         javax.swing.GroupLayout frameEasyEntryLayout = new javax.swing.GroupLayout(frameEasyEntry.getContentPane());
         frameEasyEntry.getContentPane().setLayout(frameEasyEntryLayout);
         frameEasyEntryLayout.setHorizontalGroup(
             frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 875, Short.MAX_VALUE)
+            .addGroup(frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
         );
         frameEasyEntryLayout.setVerticalGroup(
             frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(frameEasyEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -775,6 +786,11 @@ public class GUI extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (menuCheckEasyEntry.isSelected()) {
             panels = new ArrayList<>();
+            for (int i = 0; i < 11; i++) {
+                panels.add(new easyEntryPanel(this));
+
+            }
+            // frameEasyEntry.removeAll();
             //easyEntryPanel panel = new easyEntryPanel(this);
             //frameEasyEntry.setContentPane(jPanel1);
             //frameEasyEntry.getContentPane().add(panel);
@@ -785,11 +801,25 @@ public class GUI extends javax.swing.JFrame {
             //frameEasyEntry.setContentPane(jPanel1);
             //frameEasyEntry.getContentPane().add(new JLabel("HI"));
             //frameEasyEntry.getContentPane().add(panel);
-            jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-            jPanel1.add(new easyEntryPanel(this));
+            //frameEasyEntry.setLayout(new javax.swing.BoxLayout(frameEasyEntry.getContentPane(), BoxLayout.Y_AXIS));
+            //jPanel1.setLayout(new AbsoluteLayout());
+            //frameEasyEntry.setAlignmentY(0);
+            //jPanel1.setLayout(new GridBagLayout());
+            //jPanel1.add(new easyEntryPanel(this), new GBC(0,1).setAnchor(0));
+            //panels.get(0).setAlignmentY(CENTER_ALIGNMENT);
+            scroll.setLayout(new ScrollPaneLayout());
+            jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+            
+            for (int i = 0; i < 11; i++) {
+                jPanel1.add(panels.get(i), BorderLayout.NORTH);
+
+            }
+            //scroll.setV
             jPanel1.revalidate();
+            scroll.revalidate();
             //jLabel1.repaint();
-            //frameEasyEntry.revalidate();
+            frameEasyEntry.repaint();
+            frameEasyEntry.revalidate();
             //frameEasyEntry.repaint();
         } else {
             //reset the add ingredient window
@@ -1344,11 +1374,16 @@ public class GUI extends javax.swing.JFrame {
     public boolean addPanel() {
         //jPanel1.setLayout(new java.awt.BorderLayout());
         panels.add(new easyEntryPanel(this));
-        System.out.println(jPanel1.getComponentCount());
+        //System.out.println(jPanel1.getComponentCount());
         jPanel1.add(panels.get(panels.size() - 1));
-        System.out.println(jPanel1.getComponentCount());
+        //panels.get(panels.size()-1).setAlignmentY(TOP_ALIGNMENT);
+        //jPanel1.setAlignmentY(TOP_ALIGNMENT);
+        //System.out.println(jPanel1.getComponentCount());
         //panels.get(panels.size() - 1).setLocation(panels.get(panels.size() - 1).getX(), panels.get(panels.size() - 1).getY() + 50);
         jPanel1.revalidate();
+        scroll.revalidate();
+        frameEasyEntry.revalidate();
+        frameEasyEntry.repaint();
         return true;
     }
 
@@ -1463,6 +1498,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JMenu menuSave;
     public static javax.swing.JMenu menuSave1;
     public static javax.swing.JTextArea output;
+    public static javax.swing.JScrollPane scroll;
     public static javax.swing.JScrollPane scrollPane;
     public static javax.swing.JSpinner spQuantity;
     public static javax.swing.JTextArea taDirections;

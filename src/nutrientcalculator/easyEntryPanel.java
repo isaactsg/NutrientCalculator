@@ -37,9 +37,16 @@ public class easyEntryPanel extends javax.swing.JPanel {
 
         setName("Panel"); // NOI18N
 
+        jComboBox3.setEditable(true);
         jComboBox3.setToolTipText("Enter the ingredient here");
 
+        jComboBox4.setEditable(true);
         jComboBox4.setToolTipText("Enter the measurement here");
+        jComboBox4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBox4KeyReleased(evt);
+            }
+        });
 
         jButton2.setText("Check");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -81,9 +88,15 @@ public class easyEntryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println(home.addPanel());
+        home.addPanel();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jComboBox4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox4KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4KeyReleased
+    private void search(String s){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
