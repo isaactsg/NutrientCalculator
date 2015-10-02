@@ -5,14 +5,21 @@
  */
 package nutrientcalculator;
 
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author isaac
  */
 public class easyEntryPanel extends javax.swing.JPanel {
+
     GUI home;
+    ArrayList<Ingredient> match;
+
     /**
      * Creates new form easyEntryPanel
+     *
      * @param theGUI
      */
     public easyEntryPanel(GUI theGUI) {
@@ -30,21 +37,44 @@ public class easyEntryPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jSpinner2 = new javax.swing.JSpinner();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
+        comboName = new javax.swing.JComboBox();
+        comboMeasure = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
 
         setName("Panel"); // NOI18N
 
-        jComboBox3.setEditable(true);
-        jComboBox3.setToolTipText("Enter the ingredient here");
-
-        jComboBox4.setEditable(true);
-        jComboBox4.setToolTipText("Enter the measurement here");
-        jComboBox4.addKeyListener(new java.awt.event.KeyAdapter() {
+        comboName.setEditable(true);
+        comboName.setToolTipText("Enter the ingredient here");
+        comboName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboNameFocusGained(evt);
+            }
+        });
+        comboName.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                comboNameCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        comboName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                comboNameKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jComboBox4KeyReleased(evt);
+                comboNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                comboNameKeyTyped(evt);
+            }
+        });
+
+        comboMeasure.setEditable(true);
+        comboMeasure.setToolTipText("Enter the measurement here");
+        comboMeasure.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                comboMeasureKeyReleased(evt);
             }
         });
 
@@ -66,9 +96,9 @@ public class easyEntryPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboMeasure, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, 576, Short.MAX_VALUE)
+                        .addComponent(comboName, 0, 576, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -79,8 +109,8 @@ public class easyEntryPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboMeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -89,19 +119,52 @@ public class easyEntryPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         home.addPanel();
+        System.out.println("hi");
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBox4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox4KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4KeyReleased
-    private void search(String s){
-        
+    private void comboMeasureKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboMeasureKeyReleased
+
+    }//GEN-LAST:event_comboMeasureKeyReleased
+
+    private void comboNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboNameKeyReleased
+        System.out.println("press");
+        System.out.println(comboName.getSelectedItem());
+        if (comboName.getSelectedItem().toString().length() > 2) {
+            search(comboName.getSelectedItem().toString());
+        }
+        DefaultComboBoxModel box = new DefaultComboBoxModel();
+        if (!match.isEmpty()) {
+            for (int i = 0; i < match.size(); i++) {
+                box.addElement(match.get(i).getName());
+            }
+        }
+        comboName.setModel(box);
+    }//GEN-LAST:event_comboNameKeyReleased
+
+    private void comboNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboNameKeyTyped
+        System.out.println("res");        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNameKeyTyped
+
+    private void comboNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboNameKeyPressed
+        System.out.println("sd");        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNameKeyPressed
+
+    private void comboNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboNameFocusGained
+        System.out.println("gain");        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNameFocusGained
+
+    private void comboNameCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboNameCaretPositionChanged
+        System.out.println("ca");        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNameCaretPositionChanged
+    private void search(String s) {
+        match = Database.search(s.toUpperCase());
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox comboMeasure;
+    private javax.swing.JComboBox comboName;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSpinner jSpinner2;
     // End of variables declaration//GEN-END:variables

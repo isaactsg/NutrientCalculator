@@ -37,7 +37,7 @@ public class Database {
         int length = r.getLength();
         for (int i = 0; i < length; i++) {
             Object databaseLine[] = r.getNextLine();
-            System.out.println(databaseLine[0].toString() + ":" + databaseLine[1].toString());
+            //System.out.println(databaseLine[0].toString() + ":" + databaseLine[1].toString());
         }
     }
 

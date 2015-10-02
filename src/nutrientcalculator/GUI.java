@@ -788,39 +788,17 @@ public class GUI extends javax.swing.JFrame {
             panels = new ArrayList<>();
             for (int i = 0; i < 11; i++) {
                 panels.add(new easyEntryPanel(this));
-
             }
-            // frameEasyEntry.removeAll();
-            //easyEntryPanel panel = new easyEntryPanel(this);
-            //frameEasyEntry.setContentPane(jPanel1);
-            //frameEasyEntry.getContentPane().add(panel);
-//            c = frameEasyEntry.getContentPane();
-//            c.add(panel, BorderLayout.NORTH);
-//            c.add(new JLabel("HI"));
             frameEasyEntry.setVisible(true);
-            //frameEasyEntry.setContentPane(jPanel1);
-            //frameEasyEntry.getContentPane().add(new JLabel("HI"));
-            //frameEasyEntry.getContentPane().add(panel);
-            //frameEasyEntry.setLayout(new javax.swing.BoxLayout(frameEasyEntry.getContentPane(), BoxLayout.Y_AXIS));
-            //jPanel1.setLayout(new AbsoluteLayout());
-            //frameEasyEntry.setAlignmentY(0);
-            //jPanel1.setLayout(new GridBagLayout());
-            //jPanel1.add(new easyEntryPanel(this), new GBC(0,1).setAnchor(0));
-            //panels.get(0).setAlignmentY(CENTER_ALIGNMENT);
             scroll.setLayout(new ScrollPaneLayout());
             jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-            
             for (int i = 0; i < 11; i++) {
                 jPanel1.add(panels.get(i), BorderLayout.NORTH);
-
             }
-            //scroll.setV
             jPanel1.revalidate();
             scroll.revalidate();
-            //jLabel1.repaint();
             frameEasyEntry.repaint();
             frameEasyEntry.revalidate();
-            //frameEasyEntry.repaint();
         } else {
             //reset the add ingredient window
             DefaultListModel empty = new DefaultListModel();
@@ -1372,14 +1350,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     public boolean addPanel() {
-        //jPanel1.setLayout(new java.awt.BorderLayout());
         panels.add(new easyEntryPanel(this));
-        //System.out.println(jPanel1.getComponentCount());
         jPanel1.add(panels.get(panels.size() - 1));
-        //panels.get(panels.size()-1).setAlignmentY(TOP_ALIGNMENT);
-        //jPanel1.setAlignmentY(TOP_ALIGNMENT);
-        //System.out.println(jPanel1.getComponentCount());
-        //panels.get(panels.size() - 1).setLocation(panels.get(panels.size() - 1).getX(), panels.get(panels.size() - 1).getY() + 50);
         jPanel1.revalidate();
         scroll.revalidate();
         frameEasyEntry.revalidate();
