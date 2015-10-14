@@ -46,6 +46,11 @@ public class easyEntryPanel extends javax.swing.JPanel {
 
         comboName.setEditable(true);
         comboName.setToolTipText("Enter the ingredient here");
+        comboName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNameActionPerformed(evt);
+            }
+        });
         comboName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 comboNameFocusGained(evt);
@@ -56,6 +61,7 @@ public class easyEntryPanel extends javax.swing.JPanel {
                 comboNameCaretPositionChanged(evt);
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                comboNameInputMethodTextChanged(evt);
             }
         });
         comboName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -142,20 +148,28 @@ public class easyEntryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_comboNameKeyReleased
 
     private void comboNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboNameKeyTyped
-        System.out.println("res");        // TODO add your handling code here:
+        System.out.println("res");
     }//GEN-LAST:event_comboNameKeyTyped
 
     private void comboNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboNameKeyPressed
-        System.out.println("sd");        // TODO add your handling code here:
+        System.out.println("sd");
     }//GEN-LAST:event_comboNameKeyPressed
 
     private void comboNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboNameFocusGained
-        System.out.println("gain");        // TODO add your handling code here:
+        System.out.println("gain");
     }//GEN-LAST:event_comboNameFocusGained
 
     private void comboNameCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboNameCaretPositionChanged
-        System.out.println("ca");        // TODO add your handling code here:
+        System.out.println("ca");
     }//GEN-LAST:event_comboNameCaretPositionChanged
+
+    private void comboNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNameActionPerformed
+        System.out.println("HIHI");
+    }//GEN-LAST:event_comboNameActionPerformed
+
+    private void comboNameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboNameInputMethodTextChanged
+        System.out.println("HIHIHIHI");
+    }//GEN-LAST:event_comboNameInputMethodTextChanged
     private void search(String s) {
         match = Database.search(s.toUpperCase());
 
